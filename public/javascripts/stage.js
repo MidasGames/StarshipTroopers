@@ -1,7 +1,7 @@
 var stage = new PIXI.Stage(0x66FF99);
 
 // create a renderer instance.
-var renderer = PIXI.autoDetectRenderer(400, 300);
+var renderer = PIXI.autoDetectRenderer(800, 600);
 
 // add the renderer view element to the DOM
 document.body.appendChild(renderer.view);
@@ -30,6 +30,7 @@ function animate() {
     // just for fun, lets rotate mr rabbit a little
     bunny.rotation += 0.1;
     bunny.position.x += 1;
+    bunny.position.y += 1.3;
 
     // render the stage
     renderer.render(stage);

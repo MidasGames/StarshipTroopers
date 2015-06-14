@@ -9,7 +9,7 @@ document.body.appendChild(renderer.view);
 requestAnimationFrame( animate );
 
 // create a texture from an image path
-var texture = PIXI.Texture.fromImage("./public/images/lightning.png");
+var texture = PIXI.Texture.fromImage("./images/lightning.png");
 // create a new Sprite using the texture
 var bunny = new PIXI.Sprite(texture);
 
@@ -29,6 +29,7 @@ function animate() {
 
     // just for fun, lets rotate mr rabbit a little
     bunny.rotation += 0.1;
+    bunny.position.x += 1;
 
     // render the stage
     renderer.render(stage);

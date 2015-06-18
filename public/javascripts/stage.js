@@ -9,7 +9,7 @@ document.body.appendChild(renderer.view);
 requestAnimationFrame( animate );
 
 //background sprite
-var bgTexture = PIXI.Texture.fromImage('./images/spaceBG.jpg');
+var bgTexture = PIXI.Texture.fromImage('./images/space-cool-HD-wallpaper.jpg');
 var back = new PIXI.Sprite(bgTexture);
 
 back.anchor.x = 0.5;

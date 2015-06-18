@@ -93,6 +93,7 @@ function animate() {
     }
 
 
+
     // render the stage
     renderer.render(stage);
 }

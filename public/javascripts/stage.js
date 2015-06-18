@@ -92,8 +92,6 @@ function animate() {
         astronauta.position.y -= 2;
     }
 
-
-
     // render the stage
     renderer.render(stage);
 }

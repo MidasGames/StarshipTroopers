@@ -2,7 +2,8 @@ var stage = new PIXI.Stage(0x66FF99);
 
 // create a renderer instance.
 var renderer = PIXI.autoDetectRenderer(800, 600);
-
+renderer.view.height = 800;
+renderer.view.height = 600;
 // add the renderer view element to the DOM
 document.body.appendChild(renderer.view);
 
@@ -186,13 +187,9 @@ function animate() {
     astronaut.tint = 0xFFFFFF;
     astronaut2.tint = 0xFFFFFF;
 
-
-    //astronaut.position.x += 1;
     back.rotation -= 0.001;
 
     astronaut.rotation += 0.05;
-    //astronaut.position.x +=0.1;
-    //astronaut.position.y +=0.1;
 
     astronaut.x += astronaut.vx;
     astronaut.y += astronaut.vy;
@@ -207,8 +204,8 @@ function animate() {
     if (hitTestRectangle(astronaut, astronaut2)) {
         astronaut.tint = 0xff0000;
         astronaut2.tint = 0x00ff00;
-
     }
+
     // render the stage
     renderer.render(stage);
 }

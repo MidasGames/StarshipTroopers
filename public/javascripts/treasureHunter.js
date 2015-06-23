@@ -6,16 +6,16 @@ var renderer = PIXI.autoDetectRenderer(
 document.body.appendChild(renderer.view);
 
 //Load an image
-var loader = new PIXI.AssetLoader(["./images/treasureHunter.json"]);
-loader.onComplete = setup;
-loader.load();
+//var loader = new PIXI.AssetLoader(["./images/treasureHunter.json"]);
+//loader.onComplete = setup;
+//loader.load();
 
 //Define variables that might be used in more 
 //than one function
 var state, world, player, treasure, blobs, chimes, exit, player,
     healthBar, message, gameScene, gameOverScene, enemies;
 
-function setup() {
+//function setup() {
 
     //Make the game scene and add it to the stage
     gameScene = new PIXI.DisplayObjectContainer();
@@ -24,16 +24,16 @@ function setup() {
     //Make the sprites and add them to the `gameScene`
 
     //Dungeon
-    dungeon = new PIXI.Sprite.fromFrame("dungeon.png");
+    dungeon = new PIXI.Sprite.fromImage("./images/dungeon.png");//fromFrame("dungeon.png");
     gameScene.addChild(dungeon);
 
     //Door
-    door = new PIXI.Sprite.fromFrame("door.png");
+    door = new PIXI.Sprite.fromImage("./images/door.png");//fromFrame("door.png");
     door.position.set(32, 0);
     gameScene.addChild(door);
 
     //Explorer
-    explorer = new PIXI.Sprite.fromFrame("explorer.png");
+    explorer = new PIXI.Sprite.fromImage("./images/explorer.png");//fromFrame("explorer.png");
     explorer.x = 68;
     explorer.y = gameScene.height / 2 - explorer.height / 2;
     explorer.vx = 0;
@@ -41,9 +41,9 @@ function setup() {
     gameScene.addChild(explorer);
 
     //Treasure
-    treasure = new PIXI.Sprite.fromFrame("treasure.png");
-    treasure.x = gameScene.width - treasure.width - 48;
-    treasure.y = gameScene.height / 2 - treasure.height / 2;
+    treasure = new PIXI.Sprite.fromImage("./images/treasure.png");//fromFrame("treasure.png");
+    treasure.x = 400;//gameScene.width //- treasure.width - 48;
+    treasure.y = 300;//gameScene.height / 2 - treasure.height / 2;
     gameScene.addChild(treasure);
 
     //Make the blobs
@@ -60,7 +60,7 @@ function setup() {
     for (var i = 0; i < numberOfBlobs; i++) {
 
         //Make a blob
-        var blob = new PIXI.Sprite.fromFrame("blob.png");
+        var blob = new PIXI.Sprite.fromImage("./images/blob.png"); //fromFrame("blob.png");
 
         //Space each blob horizontally according to the `spacing` value.
         //`xOffset` determines the point from the left of the screen
@@ -188,7 +188,7 @@ function setup() {
 
     //Start the game loop
     gameLoop();
-}
+//}
 
 function gameLoop(){
 

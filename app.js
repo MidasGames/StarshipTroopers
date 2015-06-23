@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var example = require('./routes/pixiExample');
 var movement = require('./routes/movement');
+var treasureHunter = require('./routes/treasureHunter');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/', routes);
 app.use('/example', example);
 app.use('/users', users);
 app.use('/movement',movement)
+app.use('/treasureHunter',treasureHunter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

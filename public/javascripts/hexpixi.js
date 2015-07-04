@@ -123,7 +123,7 @@
 
         self.textures = [];
         self.hexes = new PIXI.Graphics();
-        self.container = new PIXI.DisplayObjectContainer();
+        self.container = new PIXI.Container();
         self.pixiStage = null;
         self.options = null;
         self.cells = [];
@@ -203,9 +203,9 @@
         }
 
         // Used for manually drawing a hex cell. Creates the filled in hex, creates the outline (if there is one)
-        // and then wraps them in a PIXI.DisplayObjectContainer.
+        // and then wraps them in a PIXI.Container.
         self.createDrawnHex = function (cell) {
-            var parentContainer = new PIXI.DisplayObjectContainer();
+            var parentContainer = new PIXI.Container();
 
             cell.inner = createDrawHex_internal(cell, false, true);
             parentContainer.addChild(cell.inner);
@@ -223,12 +223,12 @@
 
         // Use for creating a hex cell with a textured background. First creates a PIXI.Graphics of the hex shape.
         // Next creates a PIXI.Sprite and uses the PIXI.Graphics hex as a mask. Masked PIXI.Sprite is added to parent
-        // PIXI.DisplayObjectContainer. Hex outline (if there is one) is created and added to parent container. 
+        // PIXI.Container. Hex outline (if there is one) is created and added to parent container. 
         // Parent container is returned.
         function createTexturedHex(cell) {
             var sprite = new PIXI.Sprite(self.textures[self.options.terrainTypes[cell.terrainIndex].textureIndex]),
                 cs = hp.CoordinateSystems[self.options.coordinateSystem],
-                parentContainer = new PIXI.DisplayObjectContainer(),
+                parentContainer = new PIXI.Container(),
                 mask = null;
 
             // Get the display object for the hex shape
@@ -260,7 +260,7 @@
         function createTileHex(cell) {
             var sprite = new PIXI.Sprite(self.textures[self.options.terrainTypes[cell.terrainIndex].tileIndex]),
                 cs = hp.CoordinateSystems[self.options.coordinateSystem],
-                parentContainer = new PIXI.DisplayObjectContainer(),
+                parentContainer = new PIXI.Container(),
                 mask = null,
                 topPercent = 0.5;
 
@@ -287,7 +287,7 @@
         }
 
         function createEmptyHex(cell) {
-            var parentContainer = new PIXI.DisplayObjectContainer();
+            var parentContainer = new PIXI.Container();
 
             cell.inner = null;
 
@@ -461,13 +461,14 @@
 
             if (self.options.textures.length) {
                 // create a new loader
-                var loader = new PIXI.AssetLoader(self.options.textures, true);
+                //var loader = new PIXI.AssetLoader(self.options.textures, true);
+                PIXI.loader.add(self.options.textures, true);
 
                 // use callback
-                loader.onComplete = self.options.onAssetsLoaded;
+                PIXI.loader.onComplete = self.options.onAssetsLoaded;
 
                 //begin load
-                loader.load();
+                PIXI.loader.load();
 
                 for (var i = 0; i < self.options.textures.length; i++) {
                     self.textures.push(new PIXI.Texture.fromImage(self.options.textures[i]));
@@ -669,7 +670,7 @@
             var chg = createDrawHex_internal(cell, true, false);
             if (chg) {
                 chg.updateLineStyle(3, 0xff5521);
-                self.cellHighlighter = new PIXI.DisplayObjectContainer();
+                self.cellHighlighter = new PIXI.Container();
                 self.cellHighlighter.addChild(chg);
             } else {
                 console.log("Error creating cell hilighter");

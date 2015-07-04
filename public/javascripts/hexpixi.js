@@ -462,13 +462,14 @@
             if (self.options.textures.length) {
                 // create a new loader
                 //var loader = new PIXI.AssetLoader(self.options.textures, true);
-                PIXI.loader.add(self.options.textures, true);
+                var loader = new PIXI.loaders.Loader(self.options.textures, true);
+                //loader.add(self.options.textures, true);
 
                 // use callback
-                PIXI.loader.onComplete = self.options.onAssetsLoaded;
+                loader.once('complete',self.options.onAssetsLoaded);
 
                 //begin load
-                PIXI.loader.load();
+                loader.load();
 
                 for (var i = 0; i < self.options.textures.length; i++) {
                     self.textures.push(new PIXI.Texture.fromImage(self.options.textures[i]));

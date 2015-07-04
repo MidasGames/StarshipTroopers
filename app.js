@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var example = require('./routes/pixiExample');
 var movement = require('./routes/movement');
 var treasureHunter = require('./routes/treasureHunter');
+var simpleDemo2 = require('./routes/simpleDemo2');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/example', example);
 app.use('/users', users);
 app.use('/movement',movement)
 app.use('/treasureHunter',treasureHunter)
+app.use('/simpleDemo2',simpleDemo2)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

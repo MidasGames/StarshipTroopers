@@ -1,21 +1,13 @@
 var stage = new PIXI.Stage(0x000000);
-var renderer = PIXI.autoDetectRenderer(
-    512, 512,
-    {antialiasing: false, transparent: false, resolution: 1}
-);
+var renderer = PIXI.autoDetectRenderer(800, 600);
 document.body.appendChild(renderer.view);
 
-//Load an image
-//var loader = new PIXI.AssetLoader(["./images/treasureHunter.json"]);
-//loader.onComplete = setup;
-//loader.load();
 
 //Define variables that might be used in more 
 //than one function
-var state, world, player, treasure, blobs, chimes, exit, player,
+var  world, player, treasure, chimes, exit, player,
     healthBar, message, gameScene, gameOverScene, enemies;
 
-//function setup() {
 
     //Make the game scene and add it to the stage
     gameScene = new PIXI.DisplayObjectContainer();
@@ -24,109 +16,77 @@ var state, world, player, treasure, blobs, chimes, exit, player,
     //Make the sprites and add them to the `gameScene`
 
     //Dungeon
-    dungeon = new PIXI.Sprite.fromImage("./images/dungeon.png");//fromFrame("dungeon.png");
+    dungeon = new PIXI.Sprite.fromImage("./images/presentacion/dungeonLogo.png");
     gameScene.addChild(dungeon);
 
-    //Door
-    door = new PIXI.Sprite.fromImage("./images/door.png");//fromFrame("door.png");
-    door.position.set(32, 0);
-    gameScene.addChild(door);
+    //Treasure 1
+    treasure1 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
+    treasure1.x = 160;//gameScene.width //- treasure.width - 48;
+    treasure1.y = 500;//gameScene.height / 2 - treasure.height / 2;
+    gameScene.addChild(treasure1);
+
+    //Treasure 2
+    treasure2 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
+    treasure2.x = 320;//gameScene.width //- treasure.width - 48;
+    treasure2.y = 500;//gameScene.height / 2 - treasure.height / 2;
+    gameScene.addChild(treasure2);
+
+    //Treasure 3
+    treasure3 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
+    treasure3.x = 480;//gameScene.width //- treasure.width - 48;
+    treasure3.y = 500;//gameScene.height / 2 - treasure.height / 2;
+    gameScene.addChild(treasure3);
+
+    //Treasure 4
+    treasure4 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
+    treasure4.x = 640;//gameScene.width //- treasure.width - 48;
+    treasure4.y = 500;//gameScene.height / 2 - treasure.height / 2;
+    gameScene.addChild(treasure4);
+
+    //info 1
+    info1 = new PIXI.Sprite.fromImage("./images/presentacion/info1.png");
+   // info1.anchor.x = info1.halfWidth;
+   // info1.anchor.y = info1.halfHeight;
+    info1.x = 75;
+    info1.y = 60;
+    gameScene.addChild(info1);
+
+    //info 2
+    info2 = new PIXI.Sprite.fromImage("./images/presentacion/info2.png");
+    // info1.anchor.x = info1.halfWidth;
+    // info1.anchor.y = info1.halfHeight;
+    info2.x = 75;
+    info2.y = 60;
+    gameScene.addChild(info2);
+
+    //info 3
+    info3 = new PIXI.Sprite.fromImage("./images/presentacion/info3.png");
+    // info1.anchor.x = info1.halfWidth;
+    // info1.anchor.y = info1.halfHeight;
+    info3.x = 75;
+    info3.y = 60;
+    gameScene.addChild(info3);
+
+    //info 4
+    info4 = new PIXI.Sprite.fromImage("./images/presentacion/info4.png");
+    // info1.anchor.x = info1.halfWidth;
+    // info1.anchor.y = info1.halfHeight;
+    info4.x = 75;
+    info4.y = 60;
+    gameScene.addChild(info4);
+
+    info1.visible = false;
+    info2.visible = false;
+    info3.visible = false;
+    info4.visible = false;
 
     //Explorer
-    explorer = new PIXI.Sprite.fromImage("./images/explorer.png");//fromFrame("explorer.png");
-    explorer.x = 45;
-    explorer.y = 100;//gameScene.height / 2 - explorer.height / 2;
+    explorer = new PIXI.Sprite.fromImage("./images/presentacion/explorer.png");//fromFrame("explorer.png");
+    explorer.x = 50;
+    explorer.y = 500;//gameScene.height / 2 - explorer.height / 2;
     explorer.vx = 0;
     explorer.vy = 0;
     gameScene.addChild(explorer);
-
-    //Treasure
-    treasure = new PIXI.Sprite.fromImage("./images/treasure.png");//fromFrame("treasure.png");
-    treasure.x = 400;//gameScene.width //- treasure.width - 48;
-    treasure.y = 300;//gameScene.height / 2 - treasure.height / 2;
-    gameScene.addChild(treasure);
-
-    //Make the blobs
-    var numberOfBlobs = 9,
-        spacing = 45,
-        xOffset = 70,
-        speed = 2,
-        direction = 1;
-
-    //An array to store all the blob monsters
-    blobs = [];
-
-    //Make as many blobs as there are `numberOfBlobs`
-    for (var i = 0; i < numberOfBlobs; i++) {
-
-        //Make a blob
-        var blob = new PIXI.Sprite.fromImage("./images/blob.png"); //fromFrame("blob.png");
-
-        //Space each blob horizontally according to the `spacing` value.
-        //`xOffset` determines the point from the left of the screen
-        //at which the first blob should be added
-        var x = spacing * i + xOffset;
-
-        //Give the blob a random y position
-        var y = randomInt(0, stage.height - blob.height);
-
-        //Set the blob's position
-        blob.x = x;
-        blob.y = y;
-
-        //Set the blob's vertical velocity. `direction` will be either `1` or
-        //`-1`. `1` means the enemy will move down and `-1` means the blob will
-        //move up. Multiplying `direction` by `speed` determines the blob's
-        //vertical direction
-        blob.vy = speed * direction;
-
-        //Reverse the direction for the next blob
-        direction *= -1;
-
-        //Push the blob into the `blobs` array
-        blobs.push(blob);
-
-        //Add the blob to the `gameScene`
-        gameScene.addChild(blob);
-    }
-
-    //Create the health bar
-    healthBar = new PIXI.DisplayObjectContainer();
-    healthBar.position.set(stage.width - 170, 6)
-    gameScene.addChild(healthBar);
-
-    //Create the black background rectangle
-    var innerBar = new PIXI.Graphics();
-    innerBar.beginFill(0x000000);
-    innerBar.drawRect(0, 0, 128, 8);
-    innerBar.endFill();
-    healthBar.addChild(innerBar);
-
-    //Create the front red rectangle
-    var outerBar = new PIXI.Graphics();
-    outerBar.beginFill(0xFF3300);
-    outerBar.drawRect(0, 0, 128, 8);
-    outerBar.endFill();
-    healthBar.addChild(outerBar);
-
-    healthBar.outer = outerBar;
-
-    //Create the `gameOver` scene
-    gameOverScene = new PIXI.DisplayObjectContainer();
-    stage.addChild(gameOverScene);
-
-    //Make the `gameOver` scene invisible when the game first starts
-    gameOverScene.visible = false;
-    //gameScene.visible = false;
-
-    //Create the text sprite and add it to the `gameOver` scene
-    message = new PIXI.Text(
-        "The End!",
-        {font: "64px Futura", fill: "white"}
-    );
-    message.x = 120;
-    message.y = stage.height / 2 - 32;
-    gameOverScene.addChild(message);
 
     //Capture the keyboard arrow keys
     var left = keyboard(37),
@@ -139,6 +99,8 @@ var state, world, player, treasure, blobs, chimes, exit, player,
         //Change the explorer's velocity when the key is pressed
         explorer.vx = -5;
         explorer.vy = 0;
+
+
     };
     //Left arrow key `release` method
     left.release = function() {
@@ -184,7 +146,7 @@ var state, world, player, treasure, blobs, chimes, exit, player,
     };
 
     //Set the game state
-    state = play;
+    //state = play;
 
     //Start the game loop
     gameLoop();
@@ -196,7 +158,7 @@ function gameLoop(){
     requestAnimationFrame(gameLoop);
 
     //Update the current game state
-    state();
+    play();
 
     //Render the stage
     renderer.render(stage);
@@ -209,75 +171,47 @@ function play() {
     explorer.y += explorer.vy;
 
     //Contain the explorer inside the area of the dungeon
-    contain(explorer, {x: 28, y: 10, width: 488, height: 480});
+    contain(explorer, {x: 49, y: 36, width: 750, height: 560});
     //contain(explorer, stage);
 
     //Set `explorerHit` to `false` before checking for a collision
     var explorerHit = false;
 
-    //Loop through all the sprites in the `enemies` array
-    blobs.forEach(function(blob) {
 
-        //Move the blob
-        blob.y += blob.vy;//*2.5
-
-        //Check the blob's screen boundaries
-        var blobHitsWall = contain(blob, {x: 28, y: 10, width: 488, height: 480});
-
-        //If the blob hits the top or bottom of the stage, reverse
-        //its direction
-        if (blobHitsWall === "top" || blobHitsWall === "bottom") {
-            blob.vy *= -1;
-        }
-
-        //Test for a collision. If any of the enemies are touching
-        //the explorer, set `explorerHit` to `true`
-        if(hitTestRectangle(explorer, blob)) {
-            explorerHit = true;
-        }
-    });
-
-    //If the explorer is hit...
-    if(explorerHit) {
-
-        //Make the explorer semi-transparent
-        explorer.alpha = 0.5;
-
-        //Reduce the width of the health bar's inner rectangle by 1 pixel
-        healthBar.outer.width -= 5;
-
-    } else {
-
-        //Make the explorer fully opaque (non-transparent) if it hasn't been hit
-        explorer.alpha = 1;
-    }
 
     //Check for a collision between the explorer and the treasure
-    if (hitTestRectangle(explorer, treasure)) {
-
-        //If the treasure is touching the explorer, center it over the explorer
-        treasure.x = explorer.x + 8;
-        treasure.y = explorer.y + 8;
+    if (hitTestRectangle(explorer, treasure1)) {
+      info1.visible = true;
+    }
+    else
+    {
+        info1.visible = false;
     }
 
-    //Does the explorer have enough health? If the width of the `innerBar`
-    //is less than zero, end the game and display "You lost!"
-    if (healthBar.outer.width < 0) {
-        state = end;
-        message.setText("You lost!");
+    if (hitTestRectangle(explorer, treasure2)) {
+        info2.visible = true;
+    }
+    else
+    {
+        info2.visible = false;
     }
 
-    //If the explorer has brought the treasure to the exit,
-    //end the game and display "You won!"
-    if (hitTestRectangle(treasure, door)) {
-        state = end;
-        message.setText("You won!");
+    if (hitTestRectangle(explorer, treasure3)) {
+        info3.visible = true;
     }
-}
+    else
+    {
+        info3.visible = false;
+    }
 
-function end() {
-    gameScene.visible = false;
-    gameOverScene.visible = true;
+    if (hitTestRectangle(explorer, treasure4)) {
+        info4.visible = true;
+    }
+    else
+    {
+        info4.visible = false;
+    }
+
 }
 
 /* Helper functions */

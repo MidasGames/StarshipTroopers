@@ -20,33 +20,53 @@ var  world, player, treasure, chimes, exit, player,
     gameScene.addChild(dungeon);
 
     //Treasure 1
-    treasure1 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
-    treasure1.x = 250;//gameScene.width //- treasure.width - 48;
-    treasure1.y = 450;//gameScene.height / 2 - treasure.height / 2;
-    gameScene.addChild(treasure1);
+    treasure1closed = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
+    treasure1closed.x = 250;//gameScene.width //- treasure.width - 48;
+    treasure1closed.y = 450;//gameScene.height / 2 - treasure.height / 2;
+    gameScene.addChild(treasure1closed);
+    treasure1open = new PIXI.Sprite.fromImage("./images/presentacion/treasureOpen.png");//fromFrame("treasure.png");
+    treasure1open.x = 250;//gameScene.width //- treasure.width - 48;
+    treasure1open.y = 450;//gameScene.height / 2 - treasure.height / 2;
+    treasure1open.visible = false;
+    gameScene.addChild(treasure1open);
 
     //Treasure 2
-    treasure2 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
-    treasure2.x = 350;//gameScene.width //- treasure.width - 48;
-    treasure2.y = 450;//gameScene.height / 2 - treasure.height / 2;
-    gameScene.addChild(treasure2);
+    treasure2closed = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
+    treasure2closed.x = 350;//gameScene.width //- treasure.width - 48;
+    treasure2closed.y = 450;//gameScene.height / 2 - treasure.height / 2;
+    gameScene.addChild(treasure2closed);
+    treasure2open = new PIXI.Sprite.fromImage("./images/presentacion/treasureOpen.png");//fromFrame("treasure.png");
+    treasure2open.x = 350;//gameScene.width //- treasure.width - 48;
+    treasure2open.y = 450;//gameScene.height / 2 - treasure.height / 2;
+    treasure2open.visible = false;
+    gameScene.addChild(treasure2open);
 
     //Treasure 3
-    treasure3 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
-    treasure3.x = 450;//gameScene.width //- treasure.width - 48;
-    treasure3.y = 450;//gameScene.height / 2 - treasure.height / 2;
-    gameScene.addChild(treasure3);
+    treasure3closed = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
+    treasure3closed.x = 450;//gameScene.width //- treasure.width - 48;
+    treasure3closed.y = 450;//gameScene.height / 2 - treasure.height / 2;
+    gameScene.addChild(treasure3closed);
+    treasure3open = new PIXI.Sprite.fromImage("./images/presentacion/treasureOpen.png");//fromFrame("treasure.png");
+    treasure3open.x = 450;//gameScene.width //- treasure.width - 48;
+    treasure3open.y = 450;//gameScene.height / 2 - treasure.height / 2;
+    treasure3open.visible = false;
+    gameScene.addChild(treasure3open);
 
     //Treasure 4
-    treasure4 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
-    treasure4.x = 550;//gameScene.width //- treasure.width - 48;
-    treasure4.y = 450;//gameScene.height / 2 - treasure.height / 2;
-    gameScene.addChild(treasure4);
+    treasure4closed = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
+    treasure4closed.x = 550;//gameScene.width //- treasure.width - 48;
+    treasure4closed.y = 450;//gameScene.height / 2 - treasure.height / 2;
+    gameScene.addChild(treasure4closed);
+    treasure4open = new PIXI.Sprite.fromImage("./images/presentacion/treasureOpen.png");//fromFrame("treasure.png");
+    treasure4open.x = 550;//gameScene.width //- treasure.width - 48;
+    treasure4open.y = 450;//gameScene.height / 2 - treasure.height / 2;
+    treasure4open.visible = false;
+    gameScene.addChild(treasure4open);
 
     //info 1
     info1 = new PIXI.Sprite.fromImage("./images/presentacion/info1.png");
-   // info1.anchor.x = info1.halfWidth;
-   // info1.anchor.y = info1.halfHeight;
+    // info1.anchor.x = info1.halfWidth;
+    // info1.anchor.y = info1.halfHeight;
     info1.x = 75;
     info1.y = 60;
     gameScene.addChild(info1);
@@ -180,41 +200,54 @@ function play() {
 
 
     //Check for a collision between the explorer and the treasure
-    if (hitTestRectangle(explorer, treasure1)) {
-      info1.visible = true;
+    if (hitTestRectangle(explorer, treasure1closed)) {
+        info1.visible = true;
+        toggleVisibility(treasure1open, treasure1closed);
     }
     else
     {
         info1.visible = false;
+        toggleVisibility(treasure1closed, treasure1open);
     }
 
-    if (hitTestRectangle(explorer, treasure2)) {
+    if (hitTestRectangle(explorer, treasure2closed)) {
         info2.visible = true;
+        toggleVisibility(treasure2open, treasure2closed);
     }
     else
     {
         info2.visible = false;
+        toggleVisibility(treasure2closed, treasure2open);
     }
 
-    if (hitTestRectangle(explorer, treasure3)) {
+    if (hitTestRectangle(explorer, treasure3closed)) {
         info3.visible = true;
+        toggleVisibility(treasure3open, treasure3closed);
     }
     else
     {
         info3.visible = false;
+        toggleVisibility(treasure3closed, treasure3open);
     }
 
-    if (hitTestRectangle(explorer, treasure4)) {
+    if (hitTestRectangle(explorer, treasure4closed)) {
         info4.visible = true;
+        toggleVisibility(treasure4open, treasure4closed);
     }
     else
     {
         info4.visible = false;
+        toggleVisibility(treasure4closed, treasure4open);
     }
 
 }
 
 /* Helper functions */
+
+function toggleVisibility(visibleObject,invisibleObject) {
+    visibleObject.visible = true;
+    invisibleObject.visible = false;
+}
 
 function contain(sprite, container) {
 

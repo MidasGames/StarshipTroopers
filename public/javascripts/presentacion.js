@@ -21,26 +21,26 @@ var  world, player, treasure, chimes, exit, player,
 
     //Treasure 1
     treasure1 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
-    treasure1.x = 160;//gameScene.width //- treasure.width - 48;
-    treasure1.y = 500;//gameScene.height / 2 - treasure.height / 2;
+    treasure1.x = 250;//gameScene.width //- treasure.width - 48;
+    treasure1.y = 450;//gameScene.height / 2 - treasure.height / 2;
     gameScene.addChild(treasure1);
 
     //Treasure 2
     treasure2 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
-    treasure2.x = 320;//gameScene.width //- treasure.width - 48;
-    treasure2.y = 500;//gameScene.height / 2 - treasure.height / 2;
+    treasure2.x = 350;//gameScene.width //- treasure.width - 48;
+    treasure2.y = 450;//gameScene.height / 2 - treasure.height / 2;
     gameScene.addChild(treasure2);
 
     //Treasure 3
     treasure3 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
-    treasure3.x = 480;//gameScene.width //- treasure.width - 48;
-    treasure3.y = 500;//gameScene.height / 2 - treasure.height / 2;
+    treasure3.x = 450;//gameScene.width //- treasure.width - 48;
+    treasure3.y = 450;//gameScene.height / 2 - treasure.height / 2;
     gameScene.addChild(treasure3);
 
     //Treasure 4
     treasure4 = new PIXI.Sprite.fromImage("./images/presentacion/treasure.png");//fromFrame("treasure.png");
-    treasure4.x = 640;//gameScene.width //- treasure.width - 48;
-    treasure4.y = 500;//gameScene.height / 2 - treasure.height / 2;
+    treasure4.x = 550;//gameScene.width //- treasure.width - 48;
+    treasure4.y = 450;//gameScene.height / 2 - treasure.height / 2;
     gameScene.addChild(treasure4);
 
     //info 1
@@ -82,8 +82,8 @@ var  world, player, treasure, chimes, exit, player,
 
     //Explorer
     explorer = new PIXI.Sprite.fromImage("./images/presentacion/explorer.png");//fromFrame("explorer.png");
-    explorer.x = 50;
-    explorer.y = 500;//gameScene.height / 2 - explorer.height / 2;
+    explorer.x = 100;
+    explorer.y = 450;//gameScene.height / 2 - explorer.height / 2;
     explorer.vx = 0;
     explorer.vy = 0;
     gameScene.addChild(explorer);
